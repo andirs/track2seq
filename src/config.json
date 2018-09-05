@@ -1,0 +1,30 @@
+{
+    "EVAL_SET_FNAME": "filled_test_playlists_dict.pckl", 
+    "EVAL_SET_SIZE": 20000,
+    "PLAYLIST_FOLDER": "../../data",
+    "RANDOM_STATE": 2018,
+    "RECOMMENDATION_FOLDER": "../recommendations/",
+    "RECOMMENDATIONS_FNAME": "seq2track_recommendations.csv",
+    "RESULTS_FOLDER": "../results/",
+    "T2S_MODEL_FOLDER": "model/",
+    "T2S_MODEL_NAME": "track2seq_model",
+    "TEAM_CONTACT": "andreas.rubin-schwarz@dfki.de",
+    "TEAM_NAME": "FinalThesis",
+    "TEAM_TRACK": "CREATIVE",
+    "W2V_BINARY_FNAME": "w2v/GoogleNews-vectors-negative300.bin.gz",
+    "W2V_FNAME": "w2v/",
+    "HYPER_PARAMETERS": {
+        "seq_length": 50,
+        "n_batch_size": 32,
+        "n_layers": 2,
+        "epochs": 1,
+        "training": false,
+        "save_steps": 5000,
+        "latent_size": 128,
+        "skips": 5,
+        "learning_rate": 0.001,
+        "training_type": "full",
+        "prediction_type": "full",
+        "dropout_keep_prob": 1.0
+    }
+}
