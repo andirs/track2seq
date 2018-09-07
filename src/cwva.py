@@ -296,6 +296,8 @@ def get_correspondant_list(pid_to_name, seed_k, results_folder, recompute, is_de
                 break
             except:
                 print ('Something went wrong with playlist: \'{}\' (pid: {})'.format(pid_to_name[pid], pid))
+            if ix % 100 == 0:
+                print ('Obj:: Memory development')
         store_obj(correspondant_list, list_fname, 'pickle')
         store_obj(correspondant_list_probs, probs_fname, 'pickle')
     else:
@@ -354,14 +356,18 @@ if __name__ == "__main__":
     all_playlists_dict_fname = os.path.join(RESULTS_FOLDER, 'all_playlists_dict.pckl')
     playlist_title_2_vec_fname = os.path.join(W2V_FOLDER, 'playlist_title_2_vec.pkl')
     translation_dict_fname = os.path.join(W2V_FOLDER, 'translation_dict.pkl')
+    w2v_binary_path = os.path.join(W2V_FOLDER, w2v_fname)
     
-    print ('Loading word2vec embeddings ...')
-    if not os.path.exists(w2v_fname):
-        raise ValueError(
-            'Download pre-computed word embeddings from https://github.com/mmihaltz/word2vec-GoogleNews-vectors')
-    model = gensim.models.KeyedVectors.load_word2vec_format(w2v_fname, binary=True)
 
-    if False:
+    print ('Loading word2vec embeddings ...')
+    if not os.path.exists(w2v_binary_path):
+        raise ValueError(
+            '{} does not exist. Download pre-computed word embeddings from https://github.com/mmihaltz/word2vec-GoogleNews-vectors'.format(
+                w2v_binary_path))
+    model = gensim.models.KeyedVectors.load_word2vec_format(w2v_binary_path, binary=True)
+
+
+    if recompute:
         x_train_pids = load_obj(x_train_pids_fname, 'pickle')
         print ('Calculating average tokens for playlist titles ...')
         playlist_df = pd.read_csv(playlist_df_fname, index_col=0)
@@ -376,6 +382,7 @@ if __name__ == "__main__":
 
         store_obj(playlist_title_2_vec, playlist_title_2_vec_fname, 'pickle')
         store_obj(translation_dict, translation_dict_fname, 'pickle')
+
     else:
         playlist_title_2_vec = load_obj(playlist_title_2_vec_fname, 'pickle')
         translation_dict = load_obj(translation_dict_fname, 'pickle')
@@ -403,6 +410,7 @@ if __name__ == "__main__":
 
         test_correspondant_list, test_correspondant_list_probs = get_correspondant_list(
             test_pid_to_name, seed_k=100, results_folder=RESULTS_FOLDER, recompute=recompute, is_dev=False)
+
 
         del(model)
 

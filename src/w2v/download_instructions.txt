@@ -1,0 +1,7 @@
+# Download Instructions for w2v
+Simply download pre-computed word embeddings and store in this folder.
+
+The embeddings can be found here: 
+
+    https://github.com/mmihaltz/word2vec-GoogleNews-vectors
+

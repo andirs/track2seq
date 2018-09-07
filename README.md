@@ -1,5 +1,5 @@
 # Track2Seq
-Track2Seq is a deep long short term memory network for automated music playlist continuation. Automatic playlist continuation has been coined one of the grand challenges in music recommendation. In general terms, it is the process of automatically adding music tracks that fit the characteristics of the original playlist. 
+Track2Seq is a deep long short term memory network for automated music playlist continuation. Automatic playlist continuation has been coined one of the grand challenges in music recommendation. In general terms, it is the process of automatically adding music tracks to a playlist that fit the characteristics of the original playlist. 
 
 ## Requirements
 Track2Seq was written in Python 3.6.4 and works with TensorFlow 1.4. A `requirements.txt` file contains all necessary python modules. The most important modules and versions are mentioned below:
@@ -11,6 +11,7 @@ Track2Seq was written in Python 3.6.4 and works with TensorFlow 1.4. A `requirem
 * [pandas (0.21.0)](https://pandas.pydata.org/)
 * [scikit-learn (0.19.1)](http://scikit-learn.org)
 * [scipy (1.0.1)](https://www.scipy.org/)
+* [seaborn (0.8.1)](https://seaborn.pydata.org/)
 * [tensorflow-gpu (1.4)](http://tensorflow.org/)
 
 The easiest way to install all requirements is through following command:
