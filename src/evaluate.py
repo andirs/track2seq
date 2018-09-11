@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import numpy as np
 import os
 
@@ -191,8 +192,25 @@ def main():
     print ('Starting Evaluation')
     print ('#' * 80)
 
+    # parse arguments for command line training or prediction
+    ap = argparse.ArgumentParser()
+
+    ap.add_argument(
+        '-config', '-c', 
+        type=str, 
+        nargs='?',
+        default='config.json',
+        help='path to config.json')
+
+    args = vars(ap.parse_args())
+
+
+    print ('Config file path: {}'.format(args['config']))
+    config_arg = args['config']
+
+
     key_list = ['r_prec', 'ndcg', 'clicks', 'recall']
-    t2s_config = load_obj('config.json', 'json')
+    t2s_config = load_obj(config_arg, 'json')
     RESULTS_FOLDER = t2s_config['RESULTS_FOLDER']
     EVAL_SET_FNAME = t2s_config['EVAL_SET_FNAME']
     RECOMMENDATION_FOLDER = t2s_config['RECOMMENDATION_FOLDER']

@@ -1,5 +1,5 @@
 # Track2Seq
-Track2Seq is a deep long short term memory network for automated music playlist continuation. Automatic playlist continuation has been coined one of the grand challenges in music recommendation. In general terms, it is the process of automatically adding music tracks that fit the characteristics of the original playlist. 
+Track2Seq is a deep long short term memory network for automated music playlist continuation. Automatic playlist continuation has been coined one of the grand challenges in music recommendation. In general terms, it is the process of automatically adding music tracks to a playlist that fit the characteristics of the original playlist. 
 
 ## Requirements
 Track2Seq was written in Python 3.6.4 and works with TensorFlow 1.4. A `requirements.txt` file contains all necessary python modules. The most important modules and versions are mentioned below:
@@ -11,12 +11,32 @@ Track2Seq was written in Python 3.6.4 and works with TensorFlow 1.4. A `requirem
 * [pandas (0.21.0)](https://pandas.pydata.org/)
 * [scikit-learn (0.19.1)](http://scikit-learn.org)
 * [scipy (1.0.1)](https://www.scipy.org/)
+* [seaborn (0.8.1)](https://seaborn.pydata.org/)
 * [tensorflow-gpu (1.4)](http://tensorflow.org/)
 
 The easiest way to install all requirements is through following command:
 ```
 pip -r requirements.txt
 ```
+
+## Folder Structure
+Track2Seq contains a collection of scripts for the experimental setup.
+Below is a summary of the most important scripts and files.
+
+* `analysis/`: Thorough analysis regarding data set and sampling methods.
+* `src/baselines/`: Contains scripts to calculate baseline results.
+* `src/dicts/`: Urban- and emoji-dictionaries for seed approximations.
+* `src/model/`: Contains pre-computed Track2Seq model (`track2seq_soa/`) and default location to store future models.
+* `src/tools/`: Supplemental classes and methods that enable storing, similarity calculations, metric calculations, etc.
+* `src/w2v/`: Standard folder to store pre-computed word2vec binary in
+* `src/config.json`: Main file to setup experiment.
+* `src/config_soa.json`: Configuration file for pre-computed Track2Seq model.
+* `src/cwva.py`: Script that calculates CWVA seeds for recommendation task.
+* `src/evaluate.py`: Evaluation script.
+* `src/levenshtein.py`: Calculates Levenshtein seeds for reommendation task.
+* `src/main.py`: Shortcut to run basic experiment without baseline methods.
+* `src/pre_process.py`: Pre-processing script to encode and filter playlist sequences.
+* `src/rnn.py`: Deep LSTM network structure and training plus recommendation script.
 
 ## Usage
 Track2Seq has an experimental setup. To recompute the results of the thesis "Track2Seq - N-Item Recommendation Using Deep Long Short
@@ -74,6 +94,11 @@ All baselines can be computed by running separate scripts. Scripts are lcoated i
 
 ### 7. Evaluate
 After the prediction task is complete, running `evaluate.py` prints the final results for all computed predictions. 
+If you used a different `config.json` to run the experiment, you can indicate this by running:
+
+```
+python evaluate.py -config path/to/config.json
+```
 
 ## Further Configurations
 Below is a brief explanation of the most important parameters and hyper-parameters that can be changed in `config.json`.
@@ -106,20 +131,3 @@ Below is a brief explanation of the most important parameters and hyper-paramete
 * dropout_keep_prob: Determines how much information is kept through dropout steps. 
 * training_type: Determines whether to use complete training or noise-contrastive estimation. Options are `'full'` or `'nce'`.
 * prediction_type: Defines the prediction configuration. Options are `'semi'` or `'full'`. 
-
-## Folder Structure
-Track2Seq contains a collection of scripts for the experimental setup.
-Below is a summary of the most important scripts and files.
-
-* `analysis/`: Thorough analysis regarding data set and sampling methods.
-* `src/baselines/`: Contains scripts to calculate baseline results.
-* `src/dicts/`: Urban- and emoji-dictionaries for seed approximations.
-* `src/tools/`: Supplemental classes and methods that enable storing, similarity calculations, metric calculations, etc.
-* `src/w2v/`: Standard folder to store pre-computed word2vec binary in
-* `src/config.json`: Main file to setup experiment.
-* `src/cwva.py`: Script that calculates CWVA seeds for recommendation task.
-* `src/evaluate.py`: Evaluation script.
-* `src/levenshtein.py`: Calculates Levenshtein seeds for reommendation task.
-* `src/main.py`: Shortcut to run basic experiment without baseline methods.
-* `src/pre_process.py`: Pre-processing script to encode and filter playlist sequences.
-* `src/rnn.py`: Deep LSTM network structure and training plus recommendation script.
